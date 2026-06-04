@@ -153,11 +153,8 @@ print("✅ LangChain LCEL RAG chain initialized")
 # ---------------------------------------------------------------------------
 
 def load_initial_faqs():
-    """Load FAQs from faqs.json into ChromaDB if the collection is empty."""
+    """Load FAQs from faqs.json into ChromaDB, syncing any new entries."""
     existing_count = get_vectorstore_count(vectorstore)
-    if existing_count > 0:
-        print(f"✅ ChromaDB already has {existing_count} FAQs loaded")
-        return
 
     if not FAQS_FILE.exists():
         print("⚠️  faqs.json not found — starting with empty knowledge base")
@@ -169,21 +166,27 @@ def load_initial_faqs():
     if not faqs:
         return
 
+    if existing_count >= len(faqs):
+        print(f"✅ ChromaDB already has {existing_count} FAQs loaded (faqs.json has {len(faqs)})")
+        return
+
+    # Only load FAQs that are not yet in ChromaDB (new entries at the end)
+    new_faqs = faqs[existing_count:]
     documents = []
-    for i, faq in enumerate(faqs):
+    for i, faq in enumerate(new_faqs):
         doc = Document(
             page_content=f"Question: {faq['question']}\nAnswer: {faq['answer']}",
             metadata={
                 "question": faq["question"],
                 "answer": faq["answer"],
                 "source": "preloaded",
-                "faq_id": f"faq_{i}",
+                "faq_id": f"faq_{existing_count + i}",
             },
         )
         documents.append(doc)
 
     vectorstore.add_documents(documents)
-    print(f"✅ Loaded {len(faqs)} FAQs into ChromaDB via OpenAI Embeddings")
+    print(f"✅ Synced {len(new_faqs)} new FAQs into ChromaDB (total: {existing_count + len(new_faqs)})")
 
 
 load_initial_faqs()

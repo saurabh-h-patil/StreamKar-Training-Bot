@@ -94,9 +94,7 @@ StreamKar/
 │   ├── faqs.json               # Knowledge base (40 FAQs)
 │   ├── requirements.txt        # Python dependencies
 │   ├── .env.example            # Environment template
-│   ├── .env                    # Your API key (git-ignored)
-│   └── static/                 # Fallback HTML UI
-│       └── index.html
+│   └── .env                    # Your API key (git-ignored)
 │
 └── frontend/                   # ⚛️ React frontend
     ├── nginx.conf              # Production proxy config
@@ -129,9 +127,42 @@ StreamKar/
 { "question": "What is XYZ?", "answer": "XYZ is..." }
 ```
 
+> **⚠️ Note:** Since we have two different backend approaches (RAG and TF-IDF), you need to send the `/add_faq` request to **both** backends so the new FAQ is available on both engines. Don't forget to change the port for each:
+
+```bash
+# Add FAQ to RAG Backend (port 5000)
+curl -X POST http://localhost:5000/add_faq -H "Content-Type: application/json" -d "{\"question\": \"What is XYZ?\", \"answer\": \"XYZ is...\"}"
+
+# Add FAQ to TF-IDF Backend (port 5001)
+curl -X POST http://localhost:5001/add_faq -H "Content-Type: application/json" -d "{\"question\": \"What is XYZ?\", \"answer\": \"XYZ is...\"}"
+```
+
+> **💡 Why not port 8000?** The port was changed from `8000` (as in the original Postman collection) to `5000` and `5001` because we have other projects already running on the EC2 server that use port 8000. So we used different ports to avoid conflicts.
+
 ### `GET /faqs` — List All FAQs
 ### `GET /health` — Health Check
 ### `GET /docs` — Swagger UI
+
+---
+
+## 🧪 Testing with Postman
+
+1. Import `streamkar.postman_collection (2).json`
+2. Start both backends
+3. Change the port in the request URL from `8000` to `5000` (RAG) or `5001` (TF-IDF)
+4. Test `POST /add_faq` and `POST /ask`
+
+---
+
+## 🔌 Ports
+
+| Port | Service | Description |
+|------|---------|-------------|
+| `3000` | Nginx (Frontend) | Main entry point — serves the React UI and proxies API requests to the backends |
+| `5000` | RAG Backend | LangChain + OpenAI powered Q&A engine (internal, proxied via `/api/rag/`) |
+| `5001` | TF-IDF Backend | Offline TF-IDF powered Q&A engine (internal, proxied via `/api/tfidf/`) |
+
+> **Note:** In Docker mode, only port **3000** is exposed to the host. Ports 5000 and 5001 run internally inside the container and are reverse-proxied by Nginx.
 
 ---
 
