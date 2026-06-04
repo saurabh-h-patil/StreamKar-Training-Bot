@@ -34,7 +34,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend source
 COPY backend/main.py backend/main_tfidf.py backend/faqs.json ./
-COPY backend/static/ ./static/
+# static/ dir is optional (fallback UI); skip if not present
 
 # Copy built React frontend
 COPY --from=frontend-build /frontend/dist /var/www/html
