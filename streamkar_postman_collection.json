@@ -1,33 +1,13 @@
 {
   "info": {
     "name": "StreamKar Training Bot",
-    "description": "Complete API collection for StreamKar Training Bot — RAG + TF-IDF backends.\n\nLocal: http://localhost:5000 (RAG), http://localhost:5001 (TF-IDF)\nDeployed: http://54.225.62.40:5000 (RAG), http://54.225.62.40:5001 (TF-IDF)",
+    "description": "StreamKar Training Bot — RAG + TF-IDF API Collection\n\nLocal: localhost:5000 (RAG) | localhost:5001 (TF-IDF)\nEC2:   54.225.62.40:5000 (RAG) | 54.225.62.40:5001 (TF-IDF)\nUI:    localhost:3000 | 54.225.62.40:3000",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "variable": [
-    { "key": "rag_url", "value": "http://54.225.62.40:5000" },
-    { "key": "tfidf_url", "value": "http://54.225.62.40:5001" }
-  ],
   "item": [
     {
-      "name": "RAG Backend (Port 5000)",
+      "name": "Local — RAG (localhost:5000)",
       "item": [
-        {
-          "name": "Health Check",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{rag_url}}/health", "host": ["{{rag_url}}"], "path": ["health"] }
-          }
-        },
-        {
-          "name": "List All FAQs",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{rag_url}}/faqs", "host": ["{{rag_url}}"], "path": ["faqs"] }
-          }
-        },
         {
           "name": "Add FAQ",
           "request": {
@@ -37,7 +17,13 @@
               "mode": "raw",
               "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
             },
-            "url": { "raw": "{{rag_url}}/add_faq", "host": ["{{rag_url}}"], "path": ["add_faq"] }
+            "url": {
+              "raw": "http://localhost:5000/add_faq",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["add_faq"]
+            }
           }
         },
         {
@@ -49,62 +35,48 @@
               "mode": "raw",
               "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
             },
-            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
+            "url": {
+              "raw": "http://localhost:5000/ask",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["ask"]
+            }
           }
         },
         {
-          "name": "Ask — Typo Handling",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"question\": \"how i downlod stremkar app\"\n}"
-            },
-            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
-          }
-        },
-        {
-          "name": "Ask — Off-Topic Rejection",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"question\": \"What is the capital of India?\"\n}"
-            },
-            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
-          }
-        },
-        {
-          "name": "Swagger Docs",
+          "name": "List All FAQs",
           "request": {
             "method": "GET",
             "header": [],
-            "url": { "raw": "{{rag_url}}/docs", "host": ["{{rag_url}}"], "path": ["docs"] }
+            "url": {
+              "raw": "http://localhost:5000/faqs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["faqs"]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["health"]
+            }
           }
         }
       ]
     },
     {
-      "name": "TF-IDF Backend (Port 5001)",
+      "name": "Local — TF-IDF (localhost:5001)",
       "item": [
-        {
-          "name": "Health Check",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{tfidf_url}}/health", "host": ["{{tfidf_url}}"], "path": ["health"] }
-          }
-        },
-        {
-          "name": "List All FAQs",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{tfidf_url}}/faqs", "host": ["{{tfidf_url}}"], "path": ["faqs"] }
-          }
-        },
         {
           "name": "Add FAQ",
           "request": {
@@ -114,7 +86,13 @@
               "mode": "raw",
               "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
             },
-            "url": { "raw": "{{tfidf_url}}/add_faq", "host": ["{{tfidf_url}}"], "path": ["add_faq"] }
+            "url": {
+              "raw": "http://localhost:5001/add_faq",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["add_faq"]
+            }
           }
         },
         {
@@ -126,51 +104,179 @@
               "mode": "raw",
               "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
             },
-            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
+            "url": {
+              "raw": "http://localhost:5001/ask",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["ask"]
+            }
           }
         },
         {
-          "name": "Ask — Typo Handling",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"question\": \"how i downlod stremkar app\"\n}"
-            },
-            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
-          }
-        },
-        {
-          "name": "Ask — Off-Topic Rejection",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"question\": \"How do I order food delivery through StreamKar?\"\n}"
-            },
-            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
-          }
-        },
-        {
-          "name": "Ask — PK Match",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"question\": \"pk match meaning\"\n}"
-            },
-            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
-          }
-        },
-        {
-          "name": "Swagger Docs",
+          "name": "List All FAQs",
           "request": {
             "method": "GET",
             "header": [],
-            "url": { "raw": "{{tfidf_url}}/docs", "host": ["{{tfidf_url}}"], "path": ["docs"] }
+            "url": {
+              "raw": "http://localhost:5001/faqs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["faqs"]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EC2 — RAG (54.225.62.40:5000)",
+      "item": [
+        {
+          "name": "Add FAQ",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
+            },
+            "url": {
+              "raw": "http://54.225.62.40:5000/add_faq",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5000",
+              "path": ["add_faq"]
+            }
+          }
+        },
+        {
+          "name": "Ask Question",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
+            },
+            "url": {
+              "raw": "http://54.225.62.40:5000/ask",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5000",
+              "path": ["ask"]
+            }
+          }
+        },
+        {
+          "name": "List All FAQs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://54.225.62.40:5000/faqs",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5000",
+              "path": ["faqs"]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://54.225.62.40:5000/health",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5000",
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EC2 — TF-IDF (54.225.62.40:5001)",
+      "item": [
+        {
+          "name": "Add FAQ",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
+            },
+            "url": {
+              "raw": "http://54.225.62.40:5001/add_faq",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5001",
+              "path": ["add_faq"]
+            }
+          }
+        },
+        {
+          "name": "Ask Question",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
+            },
+            "url": {
+              "raw": "http://54.225.62.40:5001/ask",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5001",
+              "path": ["ask"]
+            }
+          }
+        },
+        {
+          "name": "List All FAQs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://54.225.62.40:5001/faqs",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5001",
+              "path": ["faqs"]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://54.225.62.40:5001/health",
+              "protocol": "http",
+              "host": ["54", "225", "62", "40"],
+              "port": "5001",
+              "path": ["health"]
+            }
           }
         }
       ]
