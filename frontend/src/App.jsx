@@ -7,8 +7,8 @@ import InfoModal from "./components/InfoModal";
 import ModeSelector from "./components/ModeSelector";
 
 const BACKENDS = {
-  rag: { base: "/api/rag", label: "LangChain RAG", tag: "AI-Powered", port: 8000 },
-  tfidf: { base: "/api/tfidf", label: "TF-IDF Engine", tag: "Zero-Config", port: 8001 },
+  rag: { base: "/api/rag", label: "LangChain RAG", tag: "AI-Powered", port: 5000 },
+  tfidf: { base: "/api/tfidf", label: "TF-IDF Engine", tag: "Zero-Config", port: 5001 },
 };
 
 function App() {

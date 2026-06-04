@@ -11,7 +11,7 @@ Why TF-IDF:
     - Perfect Postman alignment
 
 Run:
-    uvicorn main_tfidf:app --reload --port 8000
+    uvicorn main_tfidf:app --reload --port 5001
 
 Endpoints:
     POST /add_faq  — Add a new FAQ (matches Postman collection)
@@ -357,9 +357,9 @@ async def health_check():
 
 
 # ---------------------------------------------------------------------------
-# Run: uvicorn main_tfidf:app --reload --port 8001
+# Run: uvicorn main_tfidf:app --reload --port 5001
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=5001)
 

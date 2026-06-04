@@ -63,10 +63,10 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your OpenAI API key
 
-# Start RAG backend (port 8000)
+# Start RAG backend (port 5000)
 python main.py
 
-# Start TF-IDF backend (port 8001) — in a new terminal
+# Start TF-IDF backend (port 5001) — in a new terminal
 python main_tfidf.py
 ```
 
@@ -89,8 +89,8 @@ StreamKar/
 ├── .gitignore
 │
 ├── backend/                    # 🐍 Python backends
-│   ├── main.py                 # 🧠 RAG Backend (port 8000)
-│   ├── main_tfidf.py           # ⚡ TF-IDF Backend (port 8001)
+│   ├── main.py                 # 🧠 RAG Backend (port 5000)
+│   ├── main_tfidf.py           # ⚡ TF-IDF Backend (port 5001)
 │   ├── faqs.json               # Knowledge base (40 FAQs)
 │   ├── requirements.txt        # Python dependencies
 │   ├── .env.example            # Environment template

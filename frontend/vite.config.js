@@ -6,15 +6,15 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      // RAG backend (port 8000)
+      // RAG backend (port 5000)
       "/api/rag": {
-        target: "http://localhost:8000",
+        target: "http://localhost:5000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/rag/, ""),
       },
-      // TF-IDF backend (port 8001)
+      // TF-IDF backend (port 5001)
       "/api/tfidf": {
-        target: "http://localhost:8001",
+        target: "http://localhost:5001",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/tfidf/, ""),
       },
