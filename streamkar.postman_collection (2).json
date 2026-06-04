@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "040f5d34-8e58-499f-8c42-a1db8b334be3",
+		"name": "streamkar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23014523",
+		"_collection_link": "https://interstellar-robot-494819.postman.co/workspace/My-Workspace~e0bb5250-ede8-4ad3-8726-7ab506c56b6f/collection/23014523-040f5d34-8e58-499f-8c42-a1db8b334be3?action=share&source=collection_link&creator=23014523"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/add_faq",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"question\": \"what is your name\",\r\n  \"answer\": \"my name is streamkar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/add_faq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"add_faq"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
