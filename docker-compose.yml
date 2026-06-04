@@ -1,3 +1,4 @@
+version: "3.8"
 
 # ==========================================
 # StreamKar Training Bot
@@ -16,6 +17,8 @@ services:
       - backend/.env
     ports:
       - "3000:3000"
+      - "5000:5000"
+      - "5001:5001"
     volumes:
       - chroma_data:/app/chroma_db
       - ./backend/faqs.json:/app/faqs.json
