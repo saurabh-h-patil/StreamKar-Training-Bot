@@ -1,0 +1,179 @@
+{
+  "info": {
+    "name": "StreamKar Training Bot",
+    "description": "Complete API collection for StreamKar Training Bot — RAG + TF-IDF backends.\n\nLocal: http://localhost:5000 (RAG), http://localhost:5001 (TF-IDF)\nDeployed: http://54.225.62.40:5000 (RAG), http://54.225.62.40:5001 (TF-IDF)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "rag_url", "value": "http://54.225.62.40:5000" },
+    { "key": "tfidf_url", "value": "http://54.225.62.40:5001" }
+  ],
+  "item": [
+    {
+      "name": "RAG Backend (Port 5000)",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{rag_url}}/health", "host": ["{{rag_url}}"], "path": ["health"] }
+          }
+        },
+        {
+          "name": "List All FAQs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{rag_url}}/faqs", "host": ["{{rag_url}}"], "path": ["faqs"] }
+          }
+        },
+        {
+          "name": "Add FAQ",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
+            },
+            "url": { "raw": "{{rag_url}}/add_faq", "host": ["{{rag_url}}"], "path": ["add_faq"] }
+          }
+        },
+        {
+          "name": "Ask Question",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
+            },
+            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Ask — Typo Handling",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"how i downlod stremkar app\"\n}"
+            },
+            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Ask — Off-Topic Rejection",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is the capital of India?\"\n}"
+            },
+            "url": { "raw": "{{rag_url}}/ask", "host": ["{{rag_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Swagger Docs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{rag_url}}/docs", "host": ["{{rag_url}}"], "path": ["docs"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "TF-IDF Backend (Port 5001)",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{tfidf_url}}/health", "host": ["{{tfidf_url}}"], "path": ["health"] }
+          }
+        },
+        {
+          "name": "List All FAQs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{tfidf_url}}/faqs", "host": ["{{tfidf_url}}"], "path": ["faqs"] }
+          }
+        },
+        {
+          "name": "Add FAQ",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is your name?\",\n  \"answer\": \"My name is StreamKar Bot.\"\n}"
+            },
+            "url": { "raw": "{{tfidf_url}}/add_faq", "host": ["{{tfidf_url}}"], "path": ["add_faq"] }
+          }
+        },
+        {
+          "name": "Ask Question",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}"
+            },
+            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Ask — Typo Handling",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"how i downlod stremkar app\"\n}"
+            },
+            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Ask — Off-Topic Rejection",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I order food delivery through StreamKar?\"\n}"
+            },
+            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Ask — PK Match",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"pk match meaning\"\n}"
+            },
+            "url": { "raw": "{{tfidf_url}}/ask", "host": ["{{tfidf_url}}"], "path": ["ask"] }
+          }
+        },
+        {
+          "name": "Swagger Docs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{tfidf_url}}/docs", "host": ["{{tfidf_url}}"], "path": ["docs"] }
+          }
+        }
+      ]
+    }
+  ]
+}
