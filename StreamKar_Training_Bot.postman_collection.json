@@ -1,0 +1,291 @@
+{
+	"info": {
+		"name": "StreamKar Training Bot",
+		"description": "API collection for StreamKar Training Bot — covers both RAG (LangChain + OpenAI) and TF-IDF (scikit-learn) backends.\n\n**Ports:**\n- Local: RAG = 5000, TF-IDF = 5001\n- Docker: Use port 3000 with /api/rag/ or /api/tfidf/ prefix\n\n**Note:** Port changed from 8000 to 5000/5001 due to other projects running on the EC2 server.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RAG Backend (port 5000)",
+			"description": "LangChain RAG powered by OpenAI GPT-4o-mini + ChromaDB. Requires OpenAI API key.",
+			"item": [
+				{
+					"name": "Add FAQ (RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"what is your name\",\n  \"answer\": \"my name is streamkar\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:5000/add_faq",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["add_faq"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ask Question (RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:5000/ask",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["ask"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All FAQs (RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/faqs",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["faqs"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check (RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["health"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TF-IDF Backend (port 5001)",
+			"description": "TF-IDF + Cosine Similarity powered by scikit-learn. No API key required — works 100% offline.",
+			"item": [
+				{
+					"name": "Add FAQ (TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"what is your name\",\n  \"answer\": \"my name is streamkar\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:5001/add_faq",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["add_faq"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ask Question (TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:5001/ask",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["ask"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All FAQs (TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/faqs",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["faqs"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check (TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["health"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Docker Mode (port 3000)",
+			"description": "When running via Docker, all requests go through Nginx on port 3000. Use /api/rag/ or /api/tfidf/ prefix.",
+			"item": [
+				{
+					"name": "Add FAQ (Docker - RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"what is your name\",\n  \"answer\": \"my name is streamkar\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/rag/add_faq",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "rag", "add_faq"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add FAQ (Docker - TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"what is your name\",\n  \"answer\": \"my name is streamkar\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tfidf/add_faq",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "tfidf", "add_faq"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ask Question (Docker - RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/rag/ask",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "rag", "ask"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ask Question (Docker - TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"How do I earn money on StreamKar?\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tfidf/ask",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "tfidf", "ask"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check (Docker - RAG)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/rag/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "rag", "health"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check (Docker - TF-IDF)",
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/tfidf/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "tfidf", "health"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
