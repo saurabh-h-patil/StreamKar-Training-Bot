@@ -2,7 +2,7 @@
 # StreamKar Training Bot — Single Container
 # ===========================================================
 # Build:  docker build -t streamkar .
-# Run:    docker run -p 3000:3000 --env-file .env streamkar
+# Run:    docker run -p 3000:3000 --env-file backend/.env streamkar
 # Open:   http://localhost:3000
 # ===========================================================
 
@@ -29,12 +29,12 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Install Python dependencies
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend source
-COPY main.py main_tfidf.py faqs.json ./
-COPY static/ ./static/
+COPY backend/main.py backend/main_tfidf.py backend/faqs.json ./
+COPY backend/static/ ./static/
 
 # Copy built React frontend
 COPY --from=frontend-build /frontend/dist /var/www/html

@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: #07070D;
+    color: #E8E8F0;
+    overflow: hidden;
+  }
+
+  ::selection {
+    background: rgba(162, 0, 187, 0.3);
+    color: white;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+@layer components {
+  .gradient-text {
+    background: linear-gradient(135deg, #C855F0 0%, #FF6B9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sk-gradient {
+    background: linear-gradient(135deg, #A200BB, #FF6B9D);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+
+  .glass-strong {
+    background: rgba(14, 14, 22, 0.85);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* Bot response markdown rendering */
+  .bot-md p { margin-bottom: 0.5rem; }
+  .bot-md p:last-child { margin-bottom: 0; }
+  .bot-md strong { color: #ffffff; font-weight: 600; }
+  .bot-md ul, .bot-md ol { margin-left: 1rem; margin-bottom: 0.5rem; }
+  .bot-md li { font-size: 0.86rem; line-height: 1.7; margin-bottom: 0.15rem; }
+  .bot-md ul li { list-style-type: disc; }
+  .bot-md ol li { list-style-type: decimal; }
+  .bot-md code {
+    padding: 0.1rem 0.4rem;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .bot-md a {
+    color: #C855F0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(200, 85, 240, 0.3);
+  }
+  .bot-md a:hover { text-decoration-color: #C855F0; }
+}
+
+@layer utilities {
+  .animate-in {
+    animation: animIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-dot {
+    animation: dotBounce 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes animIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.25; }
+  30% { transform: translateY(-4px); opacity: 0.7; }
+}

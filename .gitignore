@@ -4,12 +4,11 @@ __pycache__/
 *.pyo
 venv/
 .venv/
-
-# ---- Environment ----
-.env
+backend/.env
 
 # ---- ChromaDB ----
 chroma_db/
+backend/chroma_db/
 
 # ---- Node / Frontend ----
 node_modules/

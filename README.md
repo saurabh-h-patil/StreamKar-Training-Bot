@@ -8,8 +8,8 @@ An AI-powered chatbot for the [StreamKar](https://streamkar.com) live streaming 
 
 ```bash
 # 1. Set up your API key
-cp .env.example .env
-# Edit .env → paste your OpenAI API key
+cp backend/.env.example backend/.env
+# Edit backend/.env → paste your OpenAI API key
 
 # 2. Run
 docker-compose up --build
@@ -19,7 +19,7 @@ Open **http://localhost:3000** — done! ✅
 
 To stop: `Ctrl+C` or `docker-compose down`
 
-> **💡 No OpenAI API key?** No problem! The **TF-IDF Engine** works 100% offline — no API key, no internet needed. Just skip step 1 (create an empty `.env` file) and select **"TF-IDF Engine"** on the mode selector screen. Only the RAG mode requires an OpenAI key.
+> **💡 No OpenAI API key?** No problem! The **TF-IDF Engine** works 100% offline — no API key, no internet needed. Just create an empty `backend/.env` file and select **"TF-IDF Engine"** on the mode selector screen. Only the RAG mode requires an OpenAI key.
 
 ---
 
@@ -43,8 +43,10 @@ The frontend lets you **switch between engines** with one click.
 
 ## 🔧 Manual Setup (Without Docker)
 
-### Backend Setup
+### Backend
 ```bash
+cd backend
+
 # Create virtual environment
 python -m venv venv
 
@@ -68,7 +70,7 @@ python main.py
 python main_tfidf.py
 ```
 
-### Frontend Setup
+### Frontend
 ```bash
 cd frontend
 npm install
@@ -83,34 +85,34 @@ npm run dev
 ```
 StreamKar/
 ├── docker-compose.yml          # 🐳 One-command launch
-├── Dockerfile                  # Python backend image
-├── .env.example                # Environment template
-├── .env                        # Your API keys (git-ignored)
+├── Dockerfile                  # Multi-stage build
+├── .gitignore
 │
-├── main.py                     # 🧠 RAG Backend (port 8000)
-├── main_tfidf.py               # ⚡ TF-IDF Backend (port 8001)
-├── faqs.json                   # Knowledge base (40 FAQs)
-├── requirements.txt            # Python dependencies
+├── backend/                    # 🐍 Python backends
+│   ├── main.py                 # 🧠 RAG Backend (port 8000)
+│   ├── main_tfidf.py           # ⚡ TF-IDF Backend (port 8001)
+│   ├── faqs.json               # Knowledge base (40 FAQs)
+│   ├── requirements.txt        # Python dependencies
+│   ├── .env.example            # Environment template
+│   ├── .env                    # Your API key (git-ignored)
+│   └── static/                 # Fallback HTML UI
+│       └── index.html
 │
-├── frontend/
-│   ├── Dockerfile              # React build + nginx
-│   ├── nginx.conf              # API proxy config
-│   ├── package.json
-│   ├── vite.config.js
-│   └── src/
-│       ├── App.jsx             # Mode selector + chat routing
-│       └── components/
-│           ├── ModeSelector.jsx
-│           ├── ChatHeader.jsx
-│           ├── ChatMessages.jsx
-│           ├── MessageBubble.jsx
-│           ├── ChatInput.jsx
-│           ├── SuggestionChips.jsx
-│           ├── TypingIndicator.jsx
-│           └── InfoModal.jsx
-│
-└── static/                     # Fallback HTML (TF-IDF standalone)
-    └── index.html
+└── frontend/                   # ⚛️ React frontend
+    ├── nginx.conf              # Production proxy config
+    ├── package.json
+    ├── vite.config.js
+    └── src/
+        ├── App.jsx
+        └── components/
+            ├── ModeSelector.jsx
+            ├── ChatHeader.jsx
+            ├── ChatMessages.jsx
+            ├── MessageBubble.jsx
+            ├── ChatInput.jsx
+            ├── SuggestionChips.jsx
+            ├── TypingIndicator.jsx
+            └── InfoModal.jsx
 ```
 
 ---
